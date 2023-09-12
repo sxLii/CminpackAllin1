@@ -5,6 +5,17 @@
 #include <math.h>
 #include "cminpack.h"
 
+typedef struct ParamType{
+
+    int ParamOP0;
+    int ParamOP1;
+    int ParamOP2;
+    int ParamOP3;
+
+} Param;
+
+Param pr;
+
 int fcn(void *p, int n, const double *x, double *fvec, int iflag);
 
 int main()
@@ -23,6 +34,9 @@ int main()
     }
 
     lwa = 180;
+
+    pr.ParamOP0=0;pr.ParamOP1=1;
+    pr.ParamOP2=2;pr.ParamOP3=3;
 
 /*      set tol to the square root of the machine precision. */
 /*      unless high solutions are required, */
@@ -46,7 +60,7 @@ int fcn(void *p, int n, const double *x, double *fvec, int iflag)
 /*      subroutine fcn for hybrd1 example. */
 
     int k;
-    double one=1, temp, temp1, temp2, three=3, two=2, zero=0;
+    double one=pr.ParamOP1, temp, temp1, temp2, three=pr.ParamOP3, two=pr.ParamOP2, zero=pr.ParamOP0;
 
     for (k=1; k <= n; k++)
     {
